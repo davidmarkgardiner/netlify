@@ -1,0 +1,422 @@
+baseURL: "https://davidmarkgardiner.github.io"
+languageCode: "en-us"
+title: "David Gardiner Profile"
+theme: hugo-profile
+
+outputs:
+  home:
+    - "HTML"
+    - "RSS"
+    - "JSON"
+  page:
+    - "HTML"
+    - "RSS"
+
+Paginate: 3
+enableRobotsTXT: true
+# disqusShortname: your-disqus-shortname
+# googleAnalytics: G-MEASUREMENT_ID
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+Menus:
+  main:
+    - identifier: blog
+      name: Blog
+      title: Blog posts
+      url: /blogs
+      weight: 1
+    # - identifier: gallery
+    #   name: Gallery
+    #   title: Blog posts
+    #   url: /gallery
+    #   weight: 2
+    #Dropdown menu
+    # - identifier: dropdown
+    #   title: Example dropdown menu
+    #   name: Dropdown
+    #   weight: 3
+    # - identifier: dropdown1
+    #   title: example dropdown 1
+    #   name: example 1
+    #   url: /#
+    #   parent: dropdown
+    #   weight: 1
+    # - identifier: dropdown2
+    #   title: example dropdown 2
+    #   name: example 2
+    #   url: /#
+    #   parent: dropdown
+    #   weight: 2
+
+params:
+  title: "David Gardiner Profile"
+  description: Text about my cool site
+  # staticPath: ""  # The path to serve the static files from
+  favicon: "/fav.png"
+
+  # Whether to serve bootstrap css and js files from CDN or not. Can be set to true, "css" or "js" to choose between
+  # serving both, only the css, or only the js files through the CDN. Any other value will make so that CDN is not used.
+  # Note the lack of "" in true, it should be of boolean type.
+  useBootstrapCDN: false
+
+  # If you want to load dynamically responsive images from Cloudinary
+  # This requires your images to be uploaded + hosted on Cloudinary
+  # Uncomment and change YOUR_CLOUD_NAME to the Cloud Name in your Cloudinary console
+  # cloudinary_cloud_name: "YOUR_CLOUD_NAME"
+
+  # Whether the fade animations on the home page will be enabled
+  animate: true
+
+  theme:
+    # disableThemeToggle: true
+    # defaultTheme: "light" # dark
+
+  font:
+    fontSize: 1rem # default: 1rem
+    fontWeight: 400 # default: 400
+    lineHeight: 1.5 # default: 1.5
+    textAlign: left # default: left
+
+  # color preference
+  # color:
+  #   textColor:
+  #   secondaryTextColor:
+  #   backgroundColor:
+  #   secondaryBackgroundColor:
+  #   primaryColor:
+  #   secondaryColor:
+
+  #   darkmode:
+  #     textColor:
+  #     secondaryTextColor:
+  #     backgroundColor:
+  #     secondaryBackgroundColor:
+  #     primaryColor:
+  #     secondaryColor:
+
+  # If you want to customize the menu, you can change it here
+  navbar:
+    align: ms-auto # Left: ms-auto | center: mx-auto | right: me-auto | Default: ms-auto
+    # brandLogo: "/logo.png" # Logo for the brand | default is the favicon variable
+    # showBrandLogo: false # Show brand logo in nav bar | default is true
+    brandName: "David Gardiner Profile" # Brand name for the brand | default is the title variable
+    disableSearch: true
+    # searchPlaceholder: "Search"
+    menus:
+      disableAbout: false
+      disableExperience: false
+      disableEducation: false
+      disableProjects: false
+      disableAchievements: false
+      disableContact: false
+
+  # Hero
+  hero:
+    enable: true
+    intro: "Hi, my name is"
+    title: "David Gardiner"
+    subtitle: "I build things for kubernetes"
+    content: "A DevSecOps Engineer"
+    image: /images/hero.svg
+    bottomImage:
+      enable: true
+    # roundImage: true # Make hero image circular | default false
+    button:
+      enable: true
+      name: "Resume"
+      url: "#"
+      download: true
+      newPage: false
+    socialLinks:
+      fontAwesomeIcons:
+        - icon: fab fa-github
+          url: https://github.com/davidmarkgardiner
+        - icon: fab fa-linkedin
+          url: "https://www.linkedin.com/in/gardinerdavid/"
+      # customIcons:
+      #   - icon: /fav.png
+      #     url: "https://example.com"
+
+  # About
+  about:
+    enable: true
+    title: "About Me"
+    image: "/images/me.png"
+    content: |-
+          I am DevSecOps Enineer working in the FinTech Sector
+
+          I am currently working  with GitOPs, GoLang and Microsfoft to deliver consumable features into production
+
+          Detailed technical knowledge of DevOps, Automation, Continuous Delivery, Monitoring,  Docker, Ansible, Kubernetes, Terraform, and IAAC. Extensive experience in engineering, applications, architecture and hybrid cloud.
+
+          A qualified AWS and Azure Solutions Architect and Microsoft Certified Solutions Expert in Server Infrastructure and Private Cloud. Proficient at working in an Agile environment.A solid understanding of Networking, Security, and Cloud Design Patterns
+
+          Please note I have 18+ years experience in IT, working across private and public sectors. I have detailed latest several years below
+    skills:
+      enable: true
+      title: "Here are a few technologies I've been working with recently:"
+      items:
+        - "Kubernetes"
+        - "Docker"
+        - "AKS"
+        - "GitOps"
+        - "IAAC"
+        - "GOlang"
+
+  # Experience
+  experience:
+    enable: true
+    # title: "Custom Name"
+    items:
+      - job: "Senior DevSecOps Engineer"
+        company: "Investment Bank"
+        # companyUrl: "https://example.com"
+        date: "April 2022 - present"
+        featuredLink:
+          enable: false
+          # name: "View the project"
+          # url: "https://example.com"
+        content: |
+        
+              Lead AKS engineer working closely with prudcution teams and Microsoft to deliver features
+
+              - Provisioning >>  Azure DevOps, Gitlab, GitOps, Flux
+              - Config Management >> ARM Templates, Terraform, K8s, Manifest’s.
+              - Monitoring  >> Prometheus, Grafana, Azure Monitor.
+              - Deployment >> Containers, AKS, AKS HCI, Azure ACI, Azure ACA (dapr)
+              - Code >> BASH, YAML, PWSH, Golang
+              - Security >> PodSecurityAdmission, Azure Policy
+              - Networking >> CNI Overal, Cilium, GaurdiCore
+              - Storage >> Azure Disk, Azure File
+
+      - job: "Senior DevOps Engineer"
+        company: "BEIS"
+        companyUrl: "https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy"
+        date: "Jan 2021 - Mar 2022"
+        featuredLink:
+          enable: false
+          url: "https://example.com"
+        info:
+          enable: true
+          content: Deploying and Supporting NetZero Funding Service on AWS, Cloud Foundry and Azure
+        content: |
+          - Provisioning >> Azure DevOps,, Containers, Pods, K8s.
+          - Config Management >> ARM Templates, Terraform, Manifest’s.
+          - Monitoring >> SumoLogic, Logit,, Prometheus, Grafana, BlackBox-Exporter, AlertManager.
+          - Deployment >> Containers, AKS, Cloud Foundry, K8s.
+          - Code >> BASH, YAML, PWSH, Golang
+
+      - job: "Senior DevOps Engineer"
+        company: "NATWEST"
+        # companyUrl: "https://example.com"
+        date: "Jan 2020 - Aug 2020"
+        # info:
+        #   enable: false
+        # featuredLink:
+        #   enable: true
+        #   url: "https://example.com"
+        content: |
+          I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. I am currently working on a project that will be used to help people find the best way to get around the city.
+
+          - Lead backend developer for a product.
+          - Created a frontend design for a product.
+
+      - job: "Senior DevOps Engineer"
+        company: "JP Morgan"
+        # companyUrl: "https://example.com"
+        # date: "June 2017 - Nov 2019"
+        # featuredLink:
+        #   enable: true
+        #   url: "https://example.com"
+        content: |
+          I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. I am currently working on a project that will be used to help people find the best way to get around the city.
+
+          - Lead backend developer for a product.
+          - Created a frontend design for a product.
+
+      - job: "Senior DevOps Engineer"
+        company: "Tesco Bank"
+        # companyUrl: "https://example.com"
+        date: "Feb 2016 - Mar 2017"
+        content: "I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. I am currently working on a project that will be used to help people find the best way to get around the city."
+
+      - job: "Senior DevOps Engineer"
+        company: "Redeem Group"
+        # companyUrl: "https://example.com"
+        date: "Feb 2016 - Mar 2017"
+        content: "I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. I am currently working on a project that will be used to help people find the best way to get around the city."
+
+  # # Education
+  # education:
+  #   enable: true
+  #   # title: "Custom Name"
+  #   index: false
+  #   items:
+  #     - title: "Master of Business Administration"
+  #       school:
+  #         name: "University of California, Berkeley"
+  #         url: "https://example.org"
+  #       date: "2013 - 2015"
+  #       GPA: "3.8 out of 5.0"
+  #       content: |-
+  #         Extracurricular Activities
+  #           - Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+  #           - Tempora esse, eaque delectus nulla quo doloribus itaque expedita alias natus optio totam maxime nihil excepturi velit a animi laborum hic similique.
+  #     - title: "Bachelor of Science in Computer Science"
+  #       school:
+  #         name: "Massachusetts Institute of Technology"
+  #         url: "https://example.org"
+  #       date: "2009 - 2013"
+  #       GPA: "3.9 out of 5.0"
+  #       content: |-
+  #         I Publiced two papers in the ACM SIGCHI Conference on Artificial Intelligence.
+  #         - [Fast and Accurate Object Detection with a Single Convolutional Neural Network](https://example.com)
+  #         - Face mask detection using a single convolutional neural network.
+
+  #         Extracurricular Activities
+  #           - Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+  #           - Tempora esse, eaque delectus nulla quo doloribus itaque expedita alias natus optio totam maxime nihil excepturi velit a animi laborum hic similique.
+  #       featuredLink:
+  #         enable: true
+  #         name: "My academic record"
+  #         url: "https://example.com"
+  #     - title: "High School"
+  #       school:
+  #         name: "Thomas Jefferson High School for Science and Technology."
+  #         url: "https://example.org"
+  #       GPA: "4.2 out of 5.0"
+  #       featuredLink:
+  #         enable: true
+  #         url: "https://example.com"
+
+  # # Achievements
+  # achievements:
+  #   enable: true
+  #   # title: "Custom Name"
+  #   items:
+  #     - title: Google kickstart runner
+  #       content: I solved all problems with optimal solution.
+  #       url: https://example.com
+  #     - title: Facebook Hackathon Winner
+  #       content: Developed a product using Artificial Intelligence.
+  #     - title: Hugo Profile
+  #       content: Developed a theme and getting 1K+ downloads per month.
+  #       url: "https://github.com/gurusabarish/hugo-profile"
+  #     - title: Microsoft Imagine Runner
+  #       content: We are developed a product which can help others.
+  #     - title: Google Summer of Code
+  #       content: Contributed to a open source project.
+  #       url: https://example.com
+
+  # projects
+  projects:
+    enable: true
+    # title: "Custom Name"
+    items:
+      - title: Hugo Profile
+        content: A highly customizable and mobile first Hugo template for personal portfolio and blog.
+        image: /images/projects/profile.png
+        featured:
+          name: Demo
+          link: https://hugo-profile.netlify.app
+        badges:
+          - "Hugo"
+          - "Bootstrap"
+          - "Javascript"
+        links:
+          - icon: fa fa-envelope
+            url: mailto:?subject=Hugo%20Profile%20Template&body=Check%20it%20out:%20https%3a%2f%2fhugo-profile.netlify.app%2fblog%2fmarkdown-syntax%2f
+          - icon: fab fa-github
+            url: https://github.com/gurusabarish/hugo-profile
+          - icon: fab fa-twitter
+            url: https://twitter.com/intent/tweet?text=Check+it+out:&url=https%3A%2F%2Fgithub.com%2Fgurusabarish%2Fhugo-profile
+
+      - title: Image Converter
+        content: A web app to convert image to pdf, png to jpg, png to jpg and png to webp without database using django.
+        image: /images/projects/converter.jpg
+        featured:
+          name: Demo
+          link: https://django-converter.herokuapp.com
+        badges:
+          - "Django"
+          - "Bootstrap"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/gurusabarish/converter
+
+      - title: Hugo Profile V2
+        content: A clean and simple Hugo template for personal portfolio and blog.
+        image: /images/projects/profile2.jpg
+        featured:
+          name: Demo V2
+          link: https://hugo-profile-2.netlify.app
+        badges:
+          - "Hugo"
+          - "Bootstrap"
+          - "Javascript"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/gurusabarish/HugoProfileV2
+
+  #Contact
+  contact:
+    enable: true
+    # title: "Custom Name"
+    content: My inbox is always open. Whether you have a question or just want to say hi, I’ll try my best to get back to you!
+    email: davidmarkgardiner@gmail.com
+    btnName: Mail me
+    # formspree:
+    #   enable: true # `contact.email` value will be ignored
+    #   formId: abcdefgh # Take it from your form's endpoint, like 'https://formspree.io/f/abcdefgh'
+    #   emailCaption: "Enter your email address"
+    #   messageCaption: "Enter your message here"
+
+  footer:
+    recentPosts:
+      path: "blogs"
+      count: 3
+      title: Recent Posts
+      enable: true
+      disableFeaturedImage: false
+    socialNetworks:
+      github: https://github.com/davidmarkgardiner
+      linkedin: https://www.linkedin.com/in/gardinerdavid/
+      # twitter: https://twitter.com
+      # instagram: https://instagram.com
+      # facebook: https://facebook.com
+
+  # List pages like blogs and posts
+  listPages:
+    disableFeaturedImage: false
+
+  # Single pages like blog and post
+  singlePages:
+    readTime:
+      enable: true
+      content: "min read"
+    scrollprogress:
+      enable: true
+
+  # For translations
+  # terms:
+  #   read: "Read"
+  #   toc: "Table Of Contents"
+  #   copyright: "All rights reserved"
+  #   pageNotFound: "Page not found"
+  #   emailText: "Check out this site"
+
+  # datesFormat:
+  #   article: "Jan 2, 2006"
+  #   articleList: "Jan 2, 2006"
+  #   articleRecent: "Jan 2, 2006"
+
+# todo
+# linke to projects  - github
+# link to blogs - medium + dev.to
+# link these pages 
+# cleanup about me add recration 
+# post website
