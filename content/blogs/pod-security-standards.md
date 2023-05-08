@@ -76,7 +76,7 @@ Setting labels  will allow you to enforce security pod policies that are also co
 
 labels  `enforce=baseline` and `enforce=resticted`
 
-We advise using `restricted` where possible and `baseline` as standard.
+I would advise using `restricted` where possible and `baseline` as standard.
 
 for production its recommended using audit for a week or more to check for any effected workloads
 
