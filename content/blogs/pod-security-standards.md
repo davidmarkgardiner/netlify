@@ -7,19 +7,16 @@ tags:
   - k8s
   - pod-security
   - aks
+  - kubernetes
 image: /images/post.jpg
 
 ---
 
 
-# Pod Security Standards
+<!-- # Pod Security Standards -->
 
 ---
 
-##
-
-> IN PROGRESS:  For further information see
->
 
 [pod-security-admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 
@@ -32,7 +29,6 @@ image: /images/post.jpg
 The Kubernetes Pod Security Standards define different isolation levels for Pods. These standards let you define how you want to restrict the behavior of pods in a clear, consistent fashion.
 
 Kubernetes offers a built-in Pod Security admission controller to enforce the Pod Security Standards. Pod security restrictions are applied at the namespace level when pods are created.
-
 
 ```
 # Privileged

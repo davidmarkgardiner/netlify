@@ -7,6 +7,7 @@ tags:
   - k8s
   - pod-security
   - aks
+  - kubernetes
 image: /images/post.jpg
 ---
 
@@ -27,7 +28,7 @@ description: The Kubernetes Pod Security Standards define different isolation le
 
 ## Pod Security Admission has replaced Pod Security Policy (PSP)
 
-Starting from Kubernetes version 1.21, Pod Security Policies (PSP) were officially deprecated and replaced with Pod Security Admission (PSA). PSA implements the Pod Security Standards (PSS), a set of policies describing various security-related characteristics of workloads in a Kubernetes cluster. As of version 1.25, PSA is now a stable feature, and PSP has been completely removed.
+PSA implements the Pod Security Standards (PSS), a set of policies describing various security-related characteristics of workloads in a Kubernetes cluster. As of version 1.25, PSA is now a stable feature, and PSP has been completely removed.
 
 ## Pod Security Admission
 
@@ -35,9 +36,6 @@ The Kubernetes Pod Security Standards define different isolation levels for Pods
 
 Kubernetes provides a built-in Pod Security admission controller to enforce the Pod Security Standards. Pod security restrictions are applied at the namespace level when creating Pods.
 
-To comply with security best practices, we strongly advise setting the following labels on your cluster. Azure policies will enforce these labels in future iterations.
-
-For further instructions, please see pod-security-standards.
 
 ```
 enforce - Policy violations will cause the pod to be rejected.
@@ -67,7 +65,7 @@ pod-security.kubernetes.io/<MODE>-version: <VERSION>
 
 ## PSP.yaml
 
-(example only, this was previously recommended for use. REMOVED in AKS 1.25)
+(example only, this was previously recommended for use)
 
 ```
 apiVersion: policy/v1beta1
@@ -165,30 +163,6 @@ This security context:
 
 ```
 
-##To see current constrainttemplates
-
-```
-kubectl get constrainttemplate
-
-NAME                                     AGE
-...
-k8sazurev2containerallowedimages         5d17h
-k8sazurev2noprivilege                    5d17h
-k8sazurev2volumetypes                    5d17h
-k8sazurev3allowedcapabilities            5d17h
-k8sazurev3allowedseccomp                 5d17h
-k8sazurev3allowedusersgroups             5d17h
-k8sazurev3containerlimits                5d17h
-k8sazurev3disallowedcapabilities         5d17h
-k8sazurev3enforceapparmor                5d17h
-k8sazurev3hostfilesystem                 5d17h
-k8sazurev3hostnetworkingports            5d17h
-k8sazurev3noprivilegeescalation          5d17h
-k8sazurev3readonlyrootfilesystem         5d17h
-k8sazurev4procmount                      5d17h
-...
-
-```
 
 ## How to comply with constraints
 
