@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aks on David Gardiner Profile</title>
+    <link>https://davidmarkgardiner.github.io/tags/aks/</link>
+    <description>Recent content in aks on David Gardiner Profile</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 May 2023 10:34:38 +0100</lastBuildDate><atom:link href="https://davidmarkgardiner.github.io/tags/aks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pod Secutiry Admission</title>
+      <link>https://davidmarkgardiner.github.io/blogs/pod-secutiry-admission/</link>
+      <pubDate>Mon, 08 May 2023 10:34:38 +0100</pubDate>
+      
+      <guid>https://davidmarkgardiner.github.io/blogs/pod-secutiry-admission/</guid>
+      <description>Pod Security Admission pod-security-admission
+pod-security-standards
+migrate-from-psp
+Pod Security Admission has replaced Pod Security Policy (PSP) PSA implements the Pod Security Standards (PSS), a set of policies describing various security-related characteristics of workloads in a Kubernetes cluster. As of version 1.25, PSA is now a stable feature, and PSP has been completely removed.
+Pod Security Admission The Kubernetes Pod Security Standards define different isolation levels for Pods. These standards allow you to clearly and consistently define how to restrict the behavior of Pods.</description>
+    </item>
+    
+    <item>
+      <title>Pod Security Standards</title>
+      <link>https://davidmarkgardiner.github.io/blogs/pod-security-standards/</link>
+      <pubDate>Mon, 08 May 2023 10:27:23 +0100</pubDate>
+      
+      <guid>https://davidmarkgardiner.github.io/blogs/pod-security-standards/</guid>
+      <description>pod-security-admission
+pod-security-standards
+migrate-from-psp
+Pod Security Standards The Kubernetes Pod Security Standards define different isolation levels for Pods. These standards let you define how you want to restrict the behavior of pods in a clear, consistent fashion.
+Kubernetes offers a built-in Pod Security admission controller to enforce the Pod Security Standards. Pod security restrictions are applied at the namespace level when pods are created.
+# Privileged Unrestricted policy, providing the widest possible level of permissions.</description>
+    </item>
+    
+  </channel>
+</rss>

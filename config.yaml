@@ -121,7 +121,7 @@ params:
     title: "David Gardiner"
     subtitle: "I build things for kubernetes"
     content: "A DevSecOps Engineer"
-    image: /images/hero.svg
+    image: /images/code.jpg
     bottomImage:
       enable: true
     # roundImage: true # Make hero image circular | default false
@@ -145,27 +145,34 @@ params:
   about:
     enable: true
     title: "About Me"
-    image: "/images/me.png"
+    image: "/images/k8s.jpg"
     content: |-
-          I am DevSecOps Enineer working in the FinTech Sector
+        A seasoned DevSecOps Engineer with over a decade of experience in the IT industry. Skilled in securing CI/CD pipelines, Azure Kubernetes Service (AKS), and Golang. Proven ability to integrate security into every stage of software development, from design to deployment. My strength lies in identifying and mitigating potential security risks before they become issues and fostering a culture of security awareness across all teams.
 
-          I am currently working  with GitOPs, GoLang and Microsfoft to deliver consumable features into production
-
-          Detailed technical knowledge of DevOps, Automation, Continuous Delivery, Monitoring,  Docker, Ansible, Kubernetes, Terraform, and IAAC. Extensive experience in engineering, applications, architecture and hybrid cloud.
-
-          A qualified AWS and Azure Solutions Architect and Microsoft Certified Solutions Expert in Server Infrastructure and Private Cloud. Proficient at working in an Agile environment.A solid understanding of Networking, Security, and Cloud Design Patterns
-
-          Please note I have 18+ years experience in IT, working across private and public sectors. I have detailed latest several years below
     skills:
       enable: true
       title: "Here are a few technologies I've been working with recently:"
-      items:
-        - "Kubernetes"
-        - "Docker"
-        - "AKS"
-        - "GitOps"
-        - "IAAC"
-        - "GOlang"
+      items: 
+            # - "Kubernetes"
+            # - "Docker"
+            # - "AKS"
+            # - "GitOps"
+            - "GOlang"
+            - "Kubernetes and Azure Kubernetes Service (AKS) Management"
+            - "CI/CD Pipelines: GitOPs, GitLab CI/CD, Azure DevOps"
+            - "Cloud Security: AWS, Azure, Google Cloud"
+            - "Infrastructure as Code: Terraform, ARM, Chef"
+            - "Container Security: Docker, Kubernetes, Aqua Security, Twistlock"
+            # - "Secure Coding Practices"
+            - "Scripting Languages: Python, Bash, PowerShell"
+            # - "AKS Network Policies"
+            # - "Azure Active Directory (AD) Integration"
+            # - "Azure Security Center"
+            # - "Azure Monitor and Azure Log Analytics"
+            # - "Azure Policy"
+            # - "Azure Container Registry (ACR)"
+            # - "AKS Network Configuration"
+            # - "Azure Key Vault"
 
   # Experience
   experience:
@@ -181,17 +188,15 @@ params:
           # name: "View the project"
           # url: "https://example.com"
         content: |
-        
-              Lead AKS engineer working closely with prudcution teams and Microsoft to deliver features
-
-              - Provisioning >>  Azure DevOps, Gitlab, GitOps, Flux
-              - Config Management >> ARM Templates, Terraform, K8s, Manifest’s.
-              - Monitoring  >> Prometheus, Grafana, Azure Monitor.
-              - Deployment >> Containers, AKS, AKS HCI, Azure ACI, Azure ACA (dapr)
-              - Code >> BASH, YAML, PWSH, Golang
-              - Security >> PodSecurityAdmission, Azure Policy
-              - Networking >> CNI Overal, Cilium, GaurdiCore
-              - Storage >> Azure Disk, Azure File
+         Served as the lead Azure Kubernetes Service (AKS) engineer, facilitating close collaboration between production teams and Microsoft to ensure successful and timely feature delivery.
+          - Instrumental in the provisioning and management of infrastructure utilizing Azure DevOps, GitLab, GitOps, Flux, ARM Templates, and Terraform.
+          - Leveraged my expertise in Kubernetes for efficient orchestration and management of containerized applications.
+          - Developed and maintained observability across systems using Prometheus, Grafana, and Azure Monitor, ensuring high system reliability and performance.
+          - Utilized a wide array of technologies for deployments including Containers, AKS, and Azure Compute Instances (ACI).
+          - Wrote and maintained scripts in Bash, YAML, PowerShell (PWSH), and developed applications in Golang, enhancing automation and efficiency across processes.
+          - Ensured the security of the Kubernetes deployments with the use of PodSecurityAdmission and Azure Policy, significantly reducing potential security risks.
+          - Managed network policies using CNI Overlays, Cilium, and GuardiCore, achieving secure and efficient network communication within the Kubernetes clusters.
+          - Administered persistent storage solutions for stateful applications using Azure Disk and Azure File, ensuring data durability and availability.`
 
       - job: "Senior DevOps Engineer"
         company: "BEIS"
@@ -319,7 +324,7 @@ params:
     items:
       - title: Golang Pipeline
         content: An example end2end deployment of aks with application and unit testing.
-        image: /images/projects/profile2.jpg
+        image: /images/projects/code.jpg
         featured:
           name: Demo
           link: https://github.com/davidmarkgardiner/go-pipeline

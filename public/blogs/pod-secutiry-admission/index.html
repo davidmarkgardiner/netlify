@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href=/fav.png type="image/gif">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</noscript>
+
+
+<link rel="stylesheet" href="/css/font.css" media="all">
+
+
+
+<meta property="og:title" content="Pod Secutiry Admission" />
+<meta property="og:description" content="Pod Security Admission pod-security-admission
+pod-security-standards
+migrate-from-psp
+Pod Security Admission has replaced Pod Security Policy (PSP) PSA implements the Pod Security Standards (PSS), a set of policies describing various security-related characteristics of workloads in a Kubernetes cluster. As of version 1.25, PSA is now a stable feature, and PSP has been completely removed.
+Pod Security Admission The Kubernetes Pod Security Standards define different isolation levels for Pods. These standards allow you to clearly and consistently define how to restrict the behavior of Pods." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://davidmarkgardiner.github.io/blogs/pod-secutiry-admission/" /><meta property="article:section" content="blogs" />
+<meta property="article:published_time" content="2023-05-08T10:34:38+01:00" />
+<meta property="article:modified_time" content="2023-05-08T10:34:38+01:00" /><meta property="og:site_name" content="David Gardiner Profile" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pod Secutiry Admission"/>
+<meta name="twitter:description" content="Pod Security Admission pod-security-admission
+pod-security-standards
+migrate-from-psp
+Pod Security Admission has replaced Pod Security Policy (PSP) PSA implements the Pod Security Standards (PSS), a set of policies describing various security-related characteristics of workloads in a Kubernetes cluster. As of version 1.25, PSA is now a stable feature, and PSP has been completely removed.
+Pod Security Admission The Kubernetes Pod Security Standards define different isolation levels for Pods. These standards allow you to clearly and consistently define how to restrict the behavior of Pods."/>
+
+
+<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
+<link rel="stylesheet" href="/css/footer.css" media="all">
+
+
+<link rel="stylesheet" href="/css/theme.css" media="all">
+
+
+
+
+<style>
+    :root {
+        --text-color: #343a40;
+        --text-secondary-color: #6c757d;
+        --background-color: #eaedf0;
+        --secondary-background-color: #64ffda1a;
+        --primary-color: #007bff;
+        --secondary-color: #f8f9fa;
+
+         
+        --text-color-dark: #e4e6eb;
+        --text-secondary-color-dark: #b0b3b8;
+        --background-color-dark: #18191a;
+        --secondary-background-color-dark: #212529;
+        --primary-color-dark: #ffffff;
+        --secondary-color-dark: #212529;
+    }
+    body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    html {
+        background-color: var(--background-color) !important;
+    }
+
+    body::-webkit-scrollbar {
+        width: .5em;
+        height: .5em;
+        background-color: var(--background-color);
+    }
+    
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px var(--background-color);
+        border-radius: 1rem;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background-color: var(--secondary-color);
+        outline: 1px solid var(--background-color);
+    }
+
+    #search-content::-webkit-scrollbar {
+        width: .5em;
+        height: .1em;
+        background-color: var(--background-color);
+    }
+</style>
+
+<meta name="description" content="">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-5/all-5.15.4.js"></script>
+
+  <title>
+Pod Secutiry Admission | David Gardiner Profile
+
+  </title>
+</head>
+
+<body class="light">
+  
+  
+<script>
+    let localStorageValue = localStorage.getItem("pref-theme");
+    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    switch (localStorageValue) {
+        case "dark":
+            document.body.classList.add('dark');
+            break;
+        case "light":
+            document.body.classList.remove('dark');
+            break;
+        default:
+            if (mediaQuery) {
+                document.body.classList.add('dark');
+            }
+            break;
+    }
+</script>
+
+
+
+<header>
+    <nav class="pt-3 navbar navbar-expand-lg animate">
+        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
+            
+            <a class="navbar-brand primary-font text-wrap" href="/">
+                
+                <img src="/fav.png" width="30" height="30"
+                    class="d-inline-block align-top">
+                David Gardiner Profile
+                
+            </a>
+
+            
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
+                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+                </svg>
+            </button>
+
+            
+            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
+                <ul class="navbar-nav ms-auto text-center">
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#about" aria-label="about">
+                            About Me
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#experience"
+                            aria-label="experience">
+                            Experience
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#projects"
+                            aria-label="projects">
+                            Projects
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#contact"
+                            aria-label="contact">
+                            Contact
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/blogs" title="Blog posts">
+                            
+                            Blog
+                        </a>
+                    </li>
+                    
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        
+                        <div class="text-center">
+                            <button id="theme-toggle">
+                                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="content">
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Pod Secutiry Admission</h1>
+            <div class="text-center">
+              DavidGardiner 
+              <small>|</small>
+              May 8, 2023
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
+            </div>
+          </div>
+          
+          <div class="featured-image">
+            <img class="img-fluid" src="/images/docker.jpg" alt="Pod Secutiry Admission">
+          </div>
+          
+          <article class="page-content  p-2">
+          <h1 id="pod-security-admission">Pod Security Admission</h1>
+<hr>
+<!-- ## title: Pod Security Admission
+layout: article
+keywords: AKS, containers, kubernetes, security, Pod Security Admission
+description: The Kubernetes Pod Security Standards define different isolation levels for Pods. These standards let you define how you want to restrict the behavior of pods in a clear, consistent fashion. -->
+<p><a href="https://kubernetes.io/docs/concepts/security/pod-security-admission/">pod-security-admission</a></p>
+<p><a href="https://kubernetes.io/docs/concepts/security/pod-security-standards/">pod-security-standards</a></p>
+<p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/migrate-from-psp/">migrate-from-psp</a></p>
+<h2 id="pod-security-admission-has-replaced-pod-security-policy-psp">Pod Security Admission has replaced Pod Security Policy (PSP)</h2>
+<p>PSA implements the Pod Security Standards (PSS), a set of policies describing various security-related characteristics of workloads in a Kubernetes cluster. As of version 1.25, PSA is now a stable feature, and PSP has been completely removed.</p>
+<h2 id="pod-security-admission-1">Pod Security Admission</h2>
+<p>The Kubernetes Pod Security Standards define different isolation levels for Pods. These standards allow you to clearly and consistently define how to restrict the behavior of Pods.</p>
+<p>Kubernetes provides a built-in Pod Security admission controller to enforce the Pod Security Standards. Pod security restrictions are applied at the namespace level when creating Pods.</p>
+<pre tabindex="0"><code>enforce - Policy violations will cause the pod to be rejected.
+audit	- Policy violations will trigger the addition of an audit annotation to the event recorded in the audit log, but are otherwise allowed.
+warn	- Policy violations will trigger a user-facing warning, but are otherwise allowed.
+
+Privileged	 - Unrestricted policy, providing the widest possible level of permissions. This policy allows for known privilege escalations.
+Baseline	 - Minimally restrictive policy which prevents known privilege escalations. Allows the default (minimally specified) Pod configuration.
+Restricted	 - Heavily restricted policy, following current Pod hardening best practices
+
+# The per-mode level label indicates which policy level to apply for the mode.
+#
+# MODE must be one of `enforce`, `audit`, or `warn`.
+# LEVEL must be one of `privileged`, `baseline`, or `restricted`.
+
+pod-security.kubernetes.io/&lt;MODE&gt;: &lt;LEVEL&gt;
+
+# Optional: per-mode version label that can be used to pin the policy to the
+# version that shipped with a given Kubernetes minor version (for example v1.26).
+#
+# MODE must be one of `enforce`, `audit`, or `warn`.
+# VERSION must be a valid Kubernetes minor version, or `latest`.
+
+pod-security.kubernetes.io/&lt;MODE&gt;-version: &lt;VERSION&gt;
+</code></pre><h2 id="pspyaml">PSP.yaml</h2>
+<p>(example only, this was previously recommended for use)</p>
+<pre tabindex="0"><code>apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: recommended-psp
+spec:
+  allowedHostPaths:
+  - pathPrefix: /var/log
+    readOnly: false
+  privileged: false
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  allowedCSIDrivers:
+    - name: blob.csi.azure.com
+    - name: disk.csi.azure.com
+    - name: file.csi.azure.com
+  allowedCapabilities:
+  - AUDIT_WRITE
+  - CHOWN
+  - DAC_OVERRIDE
+  - FOWNER
+  - FSETID
+  - KILL
+  - SETGID
+  - SETUID
+  - SETPCAP
+  - NET_BIND_SERVICE
+  - SYS_CHROOT
+  - SETFCAP
+  volumes:
+  - configMap
+  - downwardAPI
+  - emptyDir
+  - persistentVolumeClaim
+  - secret
+  - projected
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: &#39;MustRunAsNonRoot&#39;
+  seLinux:
+    rule: &#39;RunAsAny&#39;
+  supplementalGroups:
+    rule: &#39;MustRunAs&#39;
+    ranges:
+    - min: 1
+      max: 65535
+  fsGroup:
+    rule: &#39;MustRunAs&#39;
+    ranges:
+    - min: 1
+      max: 65535
+</code></pre><h2 id="deploymentyaml-that-is-now-recommended-for-use">deployment.yaml that is NOW recommended for use.</h2>
+<p>This is a Kubernetes Pod Security Admission configuration file for a container called &ldquo;podinfod&rdquo;. It specifies security settings such as not allowing privilege escalation, running as a non-root user, and dropping all capabilities.</p>
+<p>This security context:</p>
+<ul>
+<li>Prevents privilege escalation by setting allowPrivilegeEscalation to false.</li>
+<li>Prevents service account token mounting by setting to false.</li>
+<li>Drops all Linux capabilities by setting capabilities to drop all.</li>
+<li>Makes the root file system read-only by setting readOnlyRootFilesystem to true.</li>
+<li>Runs the container as a non-root user by setting runAsNonRoot to true and runAsUser to a non-root user ID (in this example, 1000).</li>
+<li>Block pod containers from sharing the host process ID namespace and host IPC namespace in a Kubernetes cluster</li>
+</ul>
+<pre tabindex="0"><code>        app.kubernetes.io/name: podinfo-kustomize
+    spec:
+      hostIPC: false
+      hostPID: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      automountServiceAccountToken: false
+      containers:
+        - name: podinfod
+          image: poc-container-registry.ubs.net/cr-demo/stefanprodan/podinfo:6.1.2
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - all
+          imagePullPolicy: IfNotPresent
+</code></pre><h2 id="how-to-comply-with-constraints">How to comply with constraints</h2>
+<p>The simplest way to comply is to set labels as per guidance here: <a href="notion://www.notion.so/podsecuritystandards.html">pod-security-standards</a></p>
+<h1 id="am18-policys-to-be-enforced-as-deny-using-azure-policy">AM18 policys to be enforced as DENY using azure Policy</h1>
+<p>Some background and guidance is provided below.</p>
+<h3 id="readonlyrootfilesystem">readOnlyRootFilesystem</h3>
+<p>To keep a system secure, it&rsquo;s important to prevent containers from writing to the root file system, which can lead to instability or compromise. Attackers can exploit this to gain elevated privileges and execute arbitrary code on the host machine. However, sometimes a container needs to write to the root file system, such as when it needs to access system-level configuration files or write logs. In these cases, proceed with caution and only allow it when necessary. It&rsquo;s generally recommended to restrict container access to the root file system to minimize the risk of compromise.</p>
+<pre tabindex="0"><code>
+containers:
+- name: podinfod
+  image: poc-container-registry.ubs.net/cr-demo/stefanprodan/podinfo:6.1.2 # {&#34;$imagepolicy&#34;: &#34;demo:podinfo-dev&#34;}
+  securityContext:
+    readOnlyRootFilesystem: true
+  imagePullPolicy: IfNotPresent
+  ports:
+</code></pre><h3 id="seccompprofile">seccompProfile</h3>
+<p>We use Seccomp to limit the system calls that containers can make, reducing their potential to perform harmful operations and minimizing the attack surface. Seccomp profiles must be set to an allowed value; both the Unconfined profile and the absence of a profile are prohibited.</p>
+<pre tabindex="0"><code>Restricted Fields
+
+spec.securityContext.seccompProfile.type
+spec.containers[*].securityContext.seccompProfile.type
+spec.initContainers[*].securityContext.seccompProfile.type
+spec.ephemeralContainers[*].securityContext.seccompProfile.type
+Allowed Values
+
+RuntimeDefault
+Localhost
+</code></pre><pre tabindex="0"><code>spec:
+securityContext:
+  # allowPrivilegeEscalation: false
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+  # capabilities:
+  #   drop:
+  #     - all
+  seccompProfile:
+    type: RuntimeDefault
+</code></pre><h3 id="automountserviceaccounttoken">automountServiceAccountToken</h3>
+<p>In AKS, pods may auto-mount a service token, which is used for authentication and authorization purposes. Service tokens are linked to a service account and are used by Kubernetes to grant permissions to resources in the cluster. AKS assigns a service account by default to each pod for authentication requests made to the Kubernetes API server.</p>
+<p>The service account associated with a pod is used to authenticate requests made by the pod to the Kubernetes API server and determine the level of authorization it has. To access certain resources, such as secrets or config maps, the pod needs to be authorized by the service account. By auto-mounting the service token, the pod can authenticate itself with the Kubernetes API server and access the necessary resources. This ensures that the pod functions properly and has the necessary permissions to perform its tasks.</p>
+<p>Auto-mounting the service token is an important step in securing the cluster and ensuring that pods have the necessary authentication and authorization to access the resources they need. However, if not properly managed, it can also pose a security risk. An attacker who gains access to a pod with a mounted service account token can potentially use the token to authenticate and gain access to other resources within the cluster.</p>
+<pre tabindex="0"><code>spec:
+securityContext:
+  # allowPrivilegeEscalation: false
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+  # capabilities:
+  #   drop:
+  #     - all
+  # seccompProfile:
+  #   type: RuntimeDefault
+automountServiceAccountToken: false
+containers:
+</code></pre><h3 id="allowprivilegeescalation">allowPrivilegeEscalation</h3>
+<p>We prevent the creation of privileged containers in a Kubernetes cluster. Privileged containers run with root privileges and have access to all resources on the host machine, including the ability to modify system files and access sensitive data.</p>
+<pre tabindex="0"><code>Privileged Pods disable most security mechanisms and must be disallowed.
+
+Restricted Fields
+
+spec.containers[*].securityContext.privileged
+spec.initContainers[*].securityContext.privileged
+spec.ephemeralContainers[*].securityContext.privileged
+
+Allowed Values
+Undefined/nil
+false
+</code></pre><pre tabindex="0"><code>containers:
+- name: podinfod
+  image: poc-container-registry.ubs.net/cr-demo/stefanprodan/podinfo:6.1.2 # {&#34;$imagepolicy&#34;: &#34;demo:podinfo-dev&#34;}
+  securityContext:
+    allowPrivilegeEscalation: false
+    privileged: false
+    readOnlyRootFilesystem: true
+  imagePullPolicy: IfNotPresent
+  ports:
+</code></pre><h2 id="allowprivilegeescalation-1">allowPrivilegeEscalation</h2>
+<p>We prevent privilege escalation in containers, where a process gains more privileges than originally granted. This is a serious security risk, as an attacker who gains control of a container with escalated privileges can potentially compromise the entire system.</p>
+<pre tabindex="0"><code>Privilege escalation (such as via set-user-ID or set-group-ID file mode) should not be allowed.
+This is Linux only policy in v1.25+
+
+Restricted Fields
+
+spec.containers[*].securityContext.allowPrivilegeEscalation
+spec.initContainers[*].securityContext.allowPrivilegeEscalation
+spec.ephemeralContainers[*].securityContext.allowPrivilegeEscalation
+
+Allowed Values
+false
+</code></pre><pre tabindex="0"><code>containers:
+- name: podinfod
+  image: poc-container-registry.ubs.net/cr-demo/stefanprodan/podinfo:6.1.2 # {&#34;$imagepolicy&#34;: &#34;demo:podinfo-dev&#34;}
+  securityContext:
+    allowPrivilegeEscalation: false
+    privileged: false
+    readOnlyRootFilesystem: true
+  imagePullPolicy: IfNotPresent
+  ports:
+</code></pre><h3 id="hostipchostpid">HostIPC/HostPID</h3>
+<p>In Kubernetes, containers are usually isolated from the host system&rsquo;s processes and IPC namespaces. However, it&rsquo;s possible to enable access to these namespaces by configuring the container&rsquo;s Pod to use the host&rsquo;s process and IPC namespaces. By setting the hostPID field in the Pod&rsquo;s spec section to true, the container running in the Pod will have access to the host&rsquo;s process namespace. This allows the container to interact with processes running on the host system. In addition, by setting the hostIPC field in the Pod&rsquo;s spec section to true, the container running in the Pod will have access to the host&rsquo;s IPC namespace. This enables the container to use shared memory, semaphores, and other interprocess communication mechanisms that are not available within the container&rsquo;s own namespace. However, enabling access to the host&rsquo;s process and IPC namespaces can be a security risk, as it may allow the container to interfere with other processes or containers running on the host system. Therefore, it&rsquo;s generally recommended to avoid using these features unless absolutely necessary.</p>
+<pre tabindex="0"><code>Sharing the host namespaces must be disallowed.
+
+Restricted Fields
+
+spec.hostNetwork
+spec.hostPID
+spec.hostIPC
+
+Allowed Values
+Undefined/nil
+false
+</code></pre><pre tabindex="0"><code>
+app.kubernetes.io/name: podinfo-kustomize
+spec:
+  hostIPC: false
+  hostPID: false
+  securityContext:
+    # allowPrivilegeEscalation: true
+</code></pre><h3 id="allowedvolumetypes">AllowedVolumeTypes</h3>
+<p>Not covered by pod security standards and must be set on the policy itself.
+<a href="https://kubernetes.io/docs/tasks/configure-pod-container/migrate-from-psp/">https://kubernetes.io/docs/tasks/configure-pod-container/migrate-from-psp/</a></p>
+<pre tabindex="0"><code>The restricted policy only permits the following volume types.
+
+Restricted Fields
+
+spec.volumes[*]
+Allowed Values
+
+Every item in the spec.volumes[*] list must set one of the following fields to a non-null value:
+
+spec.volumes[*].configMap
+spec.volumes[*].csi
+spec.volumes[*].downwardAPI
+spec.volumes[*].emptyDir
+spec.volumes[*].ephemeral
+spec.volumes[*].persistentVolumeClaim
+spec.volumes[*].projected
+spec.volumes[*].secret
+</code></pre><pre tabindex="0"><code>  containers:
+    - name: demo
+      image: alpine
+  volumes:
+  # You set volumes at the Pod level, then mount them into containers inside that Pod
+  - name: config
+    configMap:
+      # Provide the name of the ConfigMap you want to mount.
+      name: demo-name
+      # An array of keys from the ConfigMap to create as files
+      items:
+</code></pre><p>The recommended allowedVolumeTypes for Kubernetes depend on the specific requirements of your application and the level of security you want to enforce. However, there are some commonly used volume types that are generally considered safe to use in Kubernetes:</p>
+<ul>
+<li>configMap: Used to store configuration data as key-value pairs. ConfigMaps can be used to store data that is required by the container at runtime, such as environment variables, command-line arguments, and configuration files.</li>
+<li>emptyDir: A temporary volume that is created when a Pod is launched and deleted when the Pod is terminated. This type of volume is useful for storing temporary data that is required by the container during its lifecycle.</li>
+<li>secret: Used to store sensitive data, such as passwords, encryption keys, and API tokens. Secrets are encrypted at rest and can only be accessed by authorized users or applications.</li>
+<li>persistentVolumeClaim: A claim to a persistent storage resource, such as a disk volume, that is managed by Kubernetes. This type of volume is useful for storing data that needs to persist beyond the lifetime of a Pod.</li>
+<li>downwardAPI: Used to expose Pod and container metadata, such as labels, annotations, and environment variables, as files inside the container&rsquo;s filesystem.</li>
+<li>projected: A flexible volume type that can be used to combine multiple volume sources into a single directory tree inside the container&rsquo;s filesystem. The projected volume can include a mix of ConfigMaps, Secrets, and downwardAPI volumes.</li>
+</ul>
+<p>Some volume types (e.g. hostPath, nfs, and glusterfs) give access to the host system&rsquo;s filesystem or network, making them less secure. They should only be used when necessary and with caution. It&rsquo;s best to evaluate the security requirements of your application and choose the appropriate volume types that provide necessary functionality without compromising security.</p>
+<h3 id="capabilities-system-admin">capabilities: system admin</h3>
+<p>allowPrivilegeEscalation controls whether a process can gain more privileges than its parent process. This boolean directly controls whether the no_new_privs flag is set on the container process.</p>
+<p>allowPrivilegeEscalation is always true when the container is run as privileged or has CAP_SYS_ADMIN.</p>
+<p>The duplication of this setting is governed by allowPrivilegeEscalation.</p>
+<p>You cannot set <code>allowPrivilegeEscalation</code> to false and <code>capabilities.Add</code> CAP_SYS_ADMIN</p>
+<pre tabindex="0"><code>Adding additional capabilities beyond those listed below must be disallowed.
+
+Restricted Fields
+
+spec.containers[*].securityContext.capabilities.add
+spec.initContainers[*].securityContext.capabilities.add
+spec.ephemeralContainers[*].securityContext.capabilities.add
+
+Allowed Values
+
+Undefined/nil
+AUDIT_WRITE
+CHOWN
+DAC_OVERRIDE
+FOWNER
+FSETID
+KILL
+MKNOD
+NET_BIND_SERVICE
+SETFCAP
+SETGID
+SETPCAP
+SETUID
+SYS_CHROOT
+</code></pre><pre tabindex="0"><code>containers:
+  - name: podinfod
+    image: poc-container-registry.ubs.net/cr-demo/stefanprodan/podinfo:6.1.2
+    securityContext:
+      capabilities:
+        add: [&#34;NET_ADMIN&#34;, &#34;SYS_TIME&#34;]
+        drop: [&#34;CAP_SYS_ADMIN&#34;]
+</code></pre><h3 id="securitycontextsysctls">securityContext.sysctls</h3>
+<p>You can use the <code>sysctls</code> field to specify a list of kernel parameters (sysctls) that are forbidden in the container. By default, all sysctls are allowed in the container unless they are explicitly forbidden using the <code>sysctls</code> field.</p>
+<p>Here are some examples of forbidden sysctl interfaces that you can specify:</p>
+<pre tabindex="0"><code>Sysctls can disable security mechanisms or affect all containers on a host, and should be disallowed except for an allowed &#34;safe&#34; subset. A sysctl is considered safe if it is namespaced in the container or the Pod, and it is isolated from other Pods or processes on the same Node.
+
+Restricted Fields
+
+spec.securityContext.sysctls[*].name
+
+Allowed Values
+Undefined/nil
+kernel.shm_rmid_forced
+net.ipv4.ip_local_port_range
+net.ipv4.ip_unprivileged_port_start
+net.ipv4.tcp_syncookies
+net.ipv4.ping_group_range
+</code></pre><p>The following sysctls will be forbidden:</p>
+<ul>
+<li>net.ipv4.ip_forward: This disables IP forwarding between network interfaces. It&rsquo;s commonly used in denial-of-service attacks, so it&rsquo;s generally a good idea to forbid it in most cases.</li>
+<li>net.ipv4.conf.all.accept_source_route: This disables source routing, which allows a sender to specify the path that a packet should take through a network. Source routing can be used to bypass security measures, so it&rsquo;s often forbidden in secure environments.</li>
+<li>kernel.shm*: This forbids all shared memory kernel parameters, which can be used to control the behavior of shared memory segments in the container. These sysctls are often forbidden because they can be used to mount denial-of-service attacks.</li>
+<li>kernel.sem: This disables POSIX message queues and semaphore operations. These operations can be used to synchronize access to shared resources, but they can also be used to mount denial-of-service attacks.</li>
+</ul>
+<p>It&rsquo;s important to note that forbidding certain sysctl interfaces can break the functionality of certain applications or services that rely on these interfaces.</p>
+<h3 id="allowedhostpaths">AllowedHostPaths</h3>
+<pre tabindex="0"><code>HostPath volumes must be forbidden.
+
+Restricted Fields
+
+spec.volumes[*].hostPath
+Allowed Values
+
+Undefined/nil
+</code></pre><p>Kubernetes enables you to mount a host path as a volume in a container within a pod, which can be helpful in certain scenarios such as when you need to access files or data on the host system. However, this also creates a security risk as it could allow a container to access sensitive data or files on the host system.</p>
+<p>To mitigate this security risk, Kubernetes provides the hostPath volume type with a set of AllowedHostPaths fields. This allows you to specify a list of host paths that are permitted to be mounted as volumes in a pod. By default, the AllowedHostPaths field is empty, which means that host path volumes are not permitted.</p>
+<p>Some potential allowed paths might be:</p>
+<p>for <code>ubuntu</code> and <code>mariner</code> tls certs</p>
+<p><code>hostPath: /etc/ssl/certs</code></p>
+<p><code>hostPath: /etc/pki/tls/certs</code></p>
+<h3 id="allowedprocmounttype">AllowedProcMountType</h3>
+<pre tabindex="0"><code>The default /proc masks are set up to reduce attack surface, and should be required.
+
+Restricted Fields
+
+spec.containers[*].securityContext.procMount
+spec.initContainers[*].securityContext.procMount
+spec.ephemeralContainers[*].securityContext.procMount
+
+Allowed Values
+Undefined/nil
+Default
+</code></pre><p>In Kubernetes, you can increase the security of your cluster by disabling certain proc mount types. The /proc filesystem allows processes to access information about the running system. However, attackers could use some of the information exposed by this filesystem to gain information about the host system or other containers running on the same node.</p>
+<p>To disable proc mount types in Kubernetes, update the Azure policy with the procMount field set to Unmasked. This prevents containers in your cluster from accessing the /proc/sys, /proc/sysrq-trigger, and /proc/latency_stats filesystems.</p>
+<p>In Kubernetes, there are three different procMountTypes to mount the /proc filesystem into a container:</p>
+<ol>
+<li>Default: This is the default value for procMount and is used to mount /proc with the default options. This includes read-only access to most files in the filesystem, and write access to some files.</li>
+<li>Unmasked: This value allows for more privileged access to the /proc filesystem, which can expose sensitive information about the host system or other containers running on the same node. In particular, it allows for write access to the /proc/sys, /proc/sysrq-trigger, and /proc/latency_stats files.</li>
+<li>None: This value disables the mounting of the /proc filesystem in the container. This can be used to improve the security of the container, but may impact the functionality of some applications or services that rely on the /proc filesystem.</li>
+</ol>
+<p>Carefully consider which procMountType to use for your containers based on their specific requirements and the security implications of each option. In general, the Default option is recommended unless there is a specific need for more privileged access to the /proc filesystem, and it&rsquo;s best to avoid using the None option unless necessary.</p>
+<h3 id="apparmor">appArmor</h3>
+<pre tabindex="0"><code>On supported hosts, the runtime/default AppArmor profile is applied by default. The baseline policy should prevent overriding or disabling the default AppArmor profile, or restrict overrides to an allowed set of profiles.
+
+Restricted Fields
+
+metadata.annotations[&#34;container.apparmor.security.beta.kubernetes.io/*&#34;]
+
+Allowed Values
+Undefined/nil
+runtime/default
+localhost/*
+</code></pre><h3 id="selinux">SELinux</h3>
+<pre tabindex="0"><code>Setting the SELinux type is restricted, and setting a custom SELinux user or role option is forbidden.
+
+Restricted Fields
+
+spec.securityContext.seLinuxOptions.type
+spec.containers[*].securityContext.seLinuxOptions.type
+spec.initContainers[*].securityContext.seLinuxOptions.type
+spec.ephemeralContainers[*].securityContext.seLinuxOptions.type
+
+Allowed Values
+
+Undefined/&#34;&#34;
+container_t
+container_init_t
+container_kvm_t
+
+Restricted Fields
+
+spec.securityContext.seLinuxOptions.user
+spec.containers[*].securityContext.seLinuxOptions.user
+spec.initContainers[*].securityContext.seLinuxOptions.user
+spec.ephemeralContainers[*].securityContext.seLinuxOptions.user
+spec.securityContext.seLinuxOptions.role
+spec.containers[*].securityContext.seLinuxOptions.role
+spec.initContainers[*].securityContext.seLinuxOptions.role
+spec.ephemeralContainers[*].securityContext.seLinuxOptions.role
+
+Allowed Values
+Undefined/&#34;&#34;
+</code></pre><h3 id="enforcecsidriver---azure">EnforceCSIDriver - Azure</h3>
+<p>Kubernetes version 1.26 deprecates the in-tree persistent volume types <a href="http://kubernetes.io/azure-disk">kubernetes.io/azure-disk</a> and <a href="http://kubernetes.io/azure-file">kubernetes.io/azure-file</a>, which will no longer be supported. The corresponding CSI drivers <a href="http://disks.csi.azure.com/">disks.csi.azure.com</a> and <a href="http://file.csi.azure.com/">file.csi.azure.com</a> should be used instead. Although removing the deprecated drivers is not planned, you should migrate to the CSI drivers.</p>
+<p>Some clusters still use the deprecated <code>azureFile</code> volume type, which has been deprecated since version 1.22. However, this type cannot be disabled without also disabling the <code>kubernetes.io</code> type. The policy is currently on/off and cannot be used flexibly yet. This policy is intended to help with the transition, not security. We recommend leaving it in audit mode only until after the 1.26 release, at which point we can move to deny mode. We will alert users on version 1.25 to migrate to version 1.26.</p>
+<p>We advise any team currently using the deprecated Kubernetes volume types to plan their migration immediately. The affected drivers that need to be migrated to <code>*.csi.azure.com</code> are <code>kubernetes.io</code> and <code>azureFile</code>.</p>
+<h3 id="allowedflexvolumes--flexvolumedriver">AllowedFlexVolumes + FlexVolumeDriver</h3>
+<p>In Kubernetes, FlexVolume is a pluggable interface that allows third-party storage providers to create custom volume drivers for use in Kubernetes clusters. These drivers can be used to mount external storage systems or add functionality, such as encryption or compression, to Kubernetes volumes.</p>
+<p>The FlexVolume interface is designed to be flexible and extensible, and can be used with a wide range of storage systems, including cloud storage services, network-attached storage (NAS) devices, and local storage devices.</p>
+<p>FlexVolume drivers are installed on the nodes in a Kubernetes cluster and are invoked by kubelet when a Pod requests a volume backed by the driver. The FlexVolume driver then communicates with the external storage system to create or mount the volume and provides Kubernetes with the necessary information to mount the volume in the Pod.</p>
+
+          </article>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pod-security-admission-has-replaced-pod-security-policy-psp">Pod Security Admission has replaced Pod Security Policy (PSP)</a></li>
+    <li><a href="#pod-security-admission-1">Pod Security Admission</a></li>
+    <li><a href="#pspyaml">PSP.yaml</a></li>
+    <li><a href="#deploymentyaml-that-is-now-recommended-for-use">deployment.yaml that is NOW recommended for use.</a></li>
+    <li><a href="#how-to-comply-with-constraints">How to comply with constraints</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#readonlyrootfilesystem">readOnlyRootFilesystem</a></li>
+        <li><a href="#seccompprofile">seccompProfile</a></li>
+        <li><a href="#automountserviceaccounttoken">automountServiceAccountToken</a></li>
+        <li><a href="#allowprivilegeescalation">allowPrivilegeEscalation</a></li>
+      </ul>
+    </li>
+    <li><a href="#allowprivilegeescalation-1">allowPrivilegeEscalation</a>
+      <ul>
+        <li><a href="#hostipchostpid">HostIPC/HostPID</a></li>
+        <li><a href="#allowedvolumetypes">AllowedVolumeTypes</a></li>
+        <li><a href="#capabilities-system-admin">capabilities: system admin</a></li>
+        <li><a href="#securitycontextsysctls">securityContext.sysctls</a></li>
+        <li><a href="#allowedhostpaths">AllowedHostPaths</a></li>
+        <li><a href="#allowedprocmounttype">AllowedProcMountType</a></li>
+        <li><a href="#apparmor">appArmor</a></li>
+        <li><a href="#selinux">SELinux</a></li>
+        <li><a href="#enforcecsidriver---azure">EnforceCSIDriver - Azure</a></li>
+        <li><a href="#allowedflexvolumes--flexvolumedriver">AllowedFlexVolumes + FlexVolumeDriver</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              <li class="list-inline-item"><a href="https://davidmarkgardiner.github.io/tags/k8s" target="_blank">k8s</a></li>
+              
+              <li class="list-inline-item"><a href="https://davidmarkgardiner.github.io/tags/pod-security" target="_blank">pod-security</a></li>
+              
+              <li class="list-inline-item"><a href="https://davidmarkgardiner.github.io/tags/aks" target="_blank">aks</a></li>
+              
+              <li class="list-inline-item"><a href="https://davidmarkgardiner.github.io/tags/kubernetes" target="_blank">kubernetes</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://twitter.com/share?text=Pod%20Secutiry%20Admission&url=https%3a%2f%2fdavidmarkgardiner.github.io%2fblogs%2fpod-secutiry-admission%2f">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=Pod%20Secutiry%20Admission: https%3a%2f%2fdavidmarkgardiner.github.io%2fblogs%2fpod-secutiry-admission%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=Pod%20Secutiry%20Admission&amp;body=Check%20out%20this%20site https%3a%2f%2fdavidmarkgardiner.github.io%2fblogs%2fpod-secutiry-admission%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
+
+  </div><footer>
+    <div class="container py-3" id="recent-posts">
+    
+    
+    
+    
+    <div class="h3 text-center text-secondary py-3">
+        Recent Posts
+    </div>
+    <div class="row justify-content-center">
+        
+        <div class="col-lg-4 col-md-6 pt-2">
+            <div class="card h-100">
+                
+                <div class="card-header">
+                    <a href="/blogs/pod-secutiry-admission/">
+                        <img src="/images/docker.jpg" class="card-img-top" alt="Pod Secutiry Admission">
+                    </a>
+                </div>
+                
+                <div class="card-body bg-transparent p-3 shadow-sm">
+                    <a href="/blogs/pod-secutiry-admission/" class="primary-font card-title">
+                        <h5 class="card-title bg-transparent" title="Pod Secutiry Admission">Pod Secutiry Admission</h5>
+                    </a>
+                    <div class="card-text secondary-font">
+                        <p>Pod Security Admission pod-security-admission
+pod-security-standards
+migrate-from-psp
+Pod Security Admission has replaced Pod Security Policy (PSP) PSA implements the Pod Security Standards (PSS), a set of policies describing various security-related characteristics of workloads in a Kubernetes …</p>
+                    </div>
+                </div>
+                <div class="mt-auto card-footer">
+                    <span class="float-start">May 8, 2023</span>
+                    <a href="/blogs/pod-secutiry-admission/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 pt-2">
+            <div class="card h-100">
+                
+                <div class="card-header">
+                    <a href="/blogs/pod-security-standards/">
+                        <img src="/images/desk.jpg" class="card-img-top" alt="Pod Security Standards">
+                    </a>
+                </div>
+                
+                <div class="card-body bg-transparent p-3 shadow-sm">
+                    <a href="/blogs/pod-security-standards/" class="primary-font card-title">
+                        <h5 class="card-title bg-transparent" title="Pod Security Standards">Pod Security Standards</h5>
+                    </a>
+                    <div class="card-text secondary-font">
+                        <p>pod-security-admission
+pod-security-standards
+migrate-from-psp
+Pod Security Standards The Kubernetes Pod Security Standards define different isolation levels for Pods. These standards let you define how you want to restrict the behavior of pods in a clear, consistent fashion.
+Kubernetes offers a …</p>
+                    </div>
+                </div>
+                <div class="mt-auto card-footer">
+                    <span class="float-start">May 8, 2023</span>
+                    <a href="/blogs/pod-security-standards/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</div><div class="text-center pt-2">
+    
+    <span class="px-1">
+        <a href="https://github.com/davidmarkgardiner" aria-label="github">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.7em" height="2.7em" viewBox="0 0 1792 1792">
+                <path
+                    d="M522 1352q-8 9-20-3-13-11-4-19 8-9 20 3 12 11 4 19zm-42-61q9 12 0 19-8 6-17-7t0-18q9-7 17 6zm-61-60q-5 7-13 2-10-5-7-12 3-5 13-2 10 5 7 12zm31 34q-6 7-16-3-9-11-2-16 6-6 16 3 9 11 2 16zm129 112q-4 12-19 6-17-4-13-15t19-7q16 5 13 16zm63 5q0 11-16 11-17 2-17-11 0-11 16-11 17-2 17 11zm58-10q2 10-14 14t-18-8 14-15q16-2 18 9zm964-956v960q0 119-84.5 203.5t-203.5 84.5h-224q-16 0-24.5-1t-19.5-5-16-14.5-5-27.5v-239q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-121-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-86-13.5q-44 113-7 204-79 85-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-40 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 103t.5 68q0 22-11 33.5t-22 13-33 1.5h-224q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z" />
+
+                <metadata>
+                    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+                        <rdf:Description about="https://iconscout.com/legal#licenses"
+                            dc:title="Github, Online, Project, Hosting, Square"
+                            dc:description="Github, Online, Project, Hosting, Square" dc:publisher="Iconscout"
+                            dc:date="2016-12-14" dc:format="image/svg+xml" dc:language="en">
+                            <dc:creator>
+                                <rdf:Bag>
+                                    <rdf:li>Font Awesome</rdf:li>
+                                </rdf:Bag>
+                            </dc:creator>
+                        </rdf:Description>
+                    </rdf:RDF>
+                </metadata>
+            </svg>
+        </a>
+    </span>
+    
+
+    
+
+    
+
+    
+
+    
+</div><div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <div class="pb-2">
+                <a href="https://davidmarkgardiner.github.io" title="David Gardiner Profile">
+                    <img alt="Footer logo" src="/fav.png"
+                        height="40px" width="40px">
+                </a>
+            </div>
+            &copy; 2023  All Rights Reserved
+            <div class="text-secondary">
+                Made with
+                <span class="text-danger">
+                    &#10084;
+                </span>
+                and
+                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
+                    title="Designed and developed by gurusabarish">
+                    Hugo Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div></footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+</script>
+
+
+
+
+
+
+
+
+
+  <section id="search-content" class="py-2">
+    <div class="container" id="search-results"></div>
+  </section>
+</body>
+
+</html>

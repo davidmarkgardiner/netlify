@@ -8,7 +8,7 @@ tags:
   - pod-security
   - aks
   - kubernetes
-image: /images/post.jpg
+image: /images/desk.jpg
 
 ---
 
@@ -86,7 +86,7 @@ For detailed restrictions please see: [pod-security-standards](https://kubernete
 
 ```
 Example usage:
-
+``
 # Ensure to check warnings before enforcing this policy
 
 k label ns < namespace > pod-security.kubernetes.io/warn=baseline

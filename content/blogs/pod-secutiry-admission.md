@@ -8,7 +8,7 @@ tags:
   - pod-security
   - aks
   - kubernetes
-image: /images/post.jpg
+image: /images/docker.jpg
 ---
 
 # Pod Security Admission
