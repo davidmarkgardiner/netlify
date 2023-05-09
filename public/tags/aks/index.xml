@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>aks on David Gardiner Profile</title>
-    <link>https://davidmarkgardiner.github.io/tags/aks/</link>
+    <link>https://davidmarkgardiner.com/tags/aks/</link>
     <description>Recent content in aks on David Gardiner Profile</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 May 2023 10:34:38 +0100</lastBuildDate><atom:link href="https://davidmarkgardiner.github.io/tags/aks/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 May 2023 10:34:38 +0100</lastBuildDate><atom:link href="https://davidmarkgardiner.com/tags/aks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pod Secutiry Admission</title>
-      <link>https://davidmarkgardiner.github.io/blogs/pod-secutiry-admission/</link>
+      <link>https://davidmarkgardiner.com/blogs/pod-secutiry-admission/</link>
       <pubDate>Mon, 08 May 2023 10:34:38 +0100</pubDate>
       
-      <guid>https://davidmarkgardiner.github.io/blogs/pod-secutiry-admission/</guid>
+      <guid>https://davidmarkgardiner.com/blogs/pod-secutiry-admission/</guid>
       <description>Pod Security Admission pod-security-admission
 pod-security-standards
 migrate-from-psp
@@ -22,10 +22,10 @@ Pod Security Admission The Kubernetes Pod Security Standards define different is
     
     <item>
       <title>Pod Security Standards</title>
-      <link>https://davidmarkgardiner.github.io/blogs/pod-security-standards/</link>
+      <link>https://davidmarkgardiner.com/blogs/pod-security-standards/</link>
       <pubDate>Mon, 08 May 2023 10:27:23 +0100</pubDate>
       
-      <guid>https://davidmarkgardiner.github.io/blogs/pod-security-standards/</guid>
+      <guid>https://davidmarkgardiner.com/blogs/pod-security-standards/</guid>
       <description>pod-security-admission
 pod-security-standards
 migrate-from-psp
